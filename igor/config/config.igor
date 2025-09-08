@@ -84,7 +84,6 @@ module ConfigProtocol
 
     record Visma {
         dict<string, VismaOffice> offices = [];
-        string xlsx_generator;
     }
     record VismaOffice {
         string api_key;
