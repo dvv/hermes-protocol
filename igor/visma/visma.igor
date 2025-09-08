@@ -141,21 +141,5 @@ module VismaProtocol
             200: ExcelTimeOffReport,
             403: ForbiddenError,
             404: NotFoundError;
-
-        # Get timeoff monthly report for an office in XSLX format
-        [* json.enabled=false]
-        [elixir http.handler="TimeOffExcelReport" http.callback="WebProtocol.HermesVismaService.Impl" http.session_key="api"]
-        GetTimeOffMonthlyReportForOfficeExcel => GET /api/timeoff/report/monthly/{int year}/{int month}/office/{long office_id}/excel?omit_ids={?list<long> omit_ids}&omit_uids={?list<string> omit_uids} ~x-api-key:{?string api_key} ->
-            200: ~content-type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ~content-disposition:{string disposition} binary as binary,
-            403: ForbiddenError,
-            404: NotFoundError;
     }
-
-    // [elixir http.client http.base_url="Application.get_env(:hermes, :visma)[:xlsx_generator]"]
-    // webservice XlsxGeneratorService
-    // {
-    //     [* json.enabled=false]
-    //     Generate => POST /generate ExcelTimeOffReport ->
-    //         200: ~content-type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ~content-disposition:{string disposition} binary as binary;
-    // }
 }
